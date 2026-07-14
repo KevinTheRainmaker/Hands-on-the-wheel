@@ -1,0 +1,22 @@
+{
+  "sample_count": 10,
+  "api_latency_ms": {
+    "mean": 1412.6,
+    "median": 1158.7,
+    "p95": 3671.3,
+    "min": 774.4,
+    "max": 3671.3
+  },
+  "total_latency_ms": {
+    "mean": 1414.7,
+    "median": 1160.6,
+    "p95": 3672.8,
+    "min": 776.2,
+    "max": 3672.8
+  },
+  "label_counts": {
+    "Yes": 5,
+    "No": 3,
+    "Uncertain": 2
+  }
+}

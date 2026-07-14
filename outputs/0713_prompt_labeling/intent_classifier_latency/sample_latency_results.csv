@@ -1,0 +1,11 @@
+﻿id,label,api_latency_ms,total_latency_ms,rule_hint,signal
+yes_current_hypothesis,Yes,1739.9,1742.2,Yes,[0] 가설/판단 표현 감지: '틀렸': 계산이 틀렸나
+yes_current_attempt,Yes,1443.8,1445.2,Yes,[0] 시도 언급 표현 감지: '했는데': 했는데 111111 케이스에서 안돼
+yes_current_approach,Yes,875.5,879.7,Yes,[0] 접근 방향/기준 표현 감지: '일단': 일단 heapq로 풀면 되겠다
+yes_followup_from_history,Yes,1245.5,1248.6,Yes,[-1] 가설/판단 표현 감지: '되려나': 지금처럼 나머지로 처리하면 되려나 더 좋은 방법이 있나
+yes_behavior_spec,Yes,999.7,1001.2,Yes,[0] 접근 방향/기준 표현 감지: '없으면': 1을 누르면 이름과 점수를 저장하고 없으면 등록된 학생이 없습니다 출력
+no_simple_request,No,1148.0,1150.2,No,No explicit user thought/attempt/hypothesis/judgment/criterion in current or previous 5 user turns.
+no_concept_question,No,3671.3,3672.8,No,No explicit user thought/attempt/hypothesis/judgment/criterion in current or previous 5 user turns.
+no_code_only,No,1058.6,1060.2,No,No explicit user thought/attempt/hypothesis/judgment/criterion in current or previous 5 user turns.
+uncertain_short_first,Uncertain,774.4,776.2,Uncertain,첫 턴 단답/짧은 발화라 자기 의도인지 확인 불가
+uncertain_problem_statement,Uncertain,1169.4,1170.9,Uncertain,첫 턴이 문제 원문/요구사항 붙여넣기에 가까워 선행 맥락을 확인할 수 없음

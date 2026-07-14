@@ -1,0 +1,38 @@
+{
+  "total": 1669,
+  "missing_predictions": 0,
+  "overall_match_rate": 0.9994008388256441,
+  "by_gold_label": {
+    "Yes": {
+      "total": 1324,
+      "correct": 1323,
+      "match_rate": 0.9992447129909365,
+      "misclassification_rate": 0.0007552870090634441,
+      "predicted_as": {
+        "Yes": 1323,
+        "No": 1
+      }
+    },
+    "No": {
+      "total": 330,
+      "correct": 330,
+      "match_rate": 1.0,
+      "misclassification_rate": 0.0,
+      "predicted_as": {
+        "No": 330
+      }
+    },
+    "Uncertain": {
+      "total": 15,
+      "correct": 15,
+      "match_rate": 1.0,
+      "misclassification_rate": 0.0,
+      "predicted_as": {
+        "Uncertain": 15
+      }
+    }
+  },
+  "uncertain_predicted_no_rate": 0.0,
+  "passes_all_thresholds": true,
+  "threshold": "Each label misclassification_rate < 0.05 and Uncertain->No rate < 0.05"
+}

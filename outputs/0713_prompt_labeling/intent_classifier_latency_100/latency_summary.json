@@ -1,0 +1,32 @@
+{
+  "sample_count": 100,
+  "api_latency_ms": {
+    "mean": 1548.0,
+    "median": 1307.5,
+    "p95": 3500.3,
+    "min": 908.4,
+    "max": 4156.5
+  },
+  "total_latency_ms": {
+    "mean": 1550.1,
+    "median": 1309.5,
+    "p95": 3501.8,
+    "min": 910.6,
+    "max": 4158.7
+  },
+  "label_counts": {
+    "Yes": 42,
+    "No": 44,
+    "Uncertain": 14
+  },
+  "gold_label_counts": {
+    "Yes": 79,
+    "No": 20,
+    "Uncertain": 1
+  },
+  "matches": {
+    "total_with_gold": 100,
+    "correct": 59,
+    "accuracy": 0.59
+  }
+}

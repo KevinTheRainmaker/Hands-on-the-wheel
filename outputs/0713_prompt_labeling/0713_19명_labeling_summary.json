@@ -1,0 +1,16 @@
+{
+  "input_path": "C:\\Users\\HCIS\\Downloads\\0713_19명.csv",
+  "total_original_rows": 4233,
+  "unique_user_prompt_turns": 1669,
+  "label_counts_unique_prompts": {
+    "Yes": 1324,
+    "Uncertain": 15,
+    "No": 330
+  },
+  "current_explicit_expression_counts": {
+    "True": 714,
+    "False": 955
+  },
+  "output_unique_prompts_csv": "C:\\Users\\HCIS\\Desktop\\개인주제\\03. (CHI'27) Hands Back on the Wheel\\Hands-on-the-wheel-codex\\outputs\\0713_prompt_labeling\\0713_19명_user_prompts_labeled.csv",
+  "output_full_rows_csv": "C:\\Users\\HCIS\\Desktop\\개인주제\\03. (CHI'27) Hands Back on the Wheel\\Hands-on-the-wheel-codex\\outputs\\0713_prompt_labeling\\0713_19명_all_rows_with_prompt_labels.csv"
+}

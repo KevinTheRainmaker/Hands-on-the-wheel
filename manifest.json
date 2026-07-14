@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "Delegation Prompt Gate",
+  "description": "Intercepts ChatGPT prompts and prepares them for delegation-aware rewriting workflows.",
+  "version": "0.1.0",
+  "permissions": ["storage"],
+  "host_permissions": [
+    "https://chat.openai.com/*",
+    "https://chatgpt.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://chat.openai.com/*",
+        "https://chatgpt.com/*"
+      ],
+      "js": ["src/classifier.js", "src/intervention.js", "src/content.js"],
+      "css": ["src/styles.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}

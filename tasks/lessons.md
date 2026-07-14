@@ -1,0 +1,31 @@
+# Lessons
+
+- 페이지 내부 오버레이를 주입하는 익스텐션에서는 오버레이의 `textarea`/버튼이 원본 웹앱 입력창 탐색 로직에 섞이지 않도록, 입력 후보 탐색 단계에서 익스텐션 루트 내부 요소를 제외해야 한다.
+- 학습 모델을 나중에 붙일 계획이면 먼저 `label`, `confidence`, `model`, `version` 같은 작은 반환 계약을 고정하고 placeholder도 같은 계약을 지키게 해야 호출부 변경을 줄일 수 있다.
+- classifier와 LLM analyzer를 분리할 때 classifier에는 현재 턴만 전달하고, 대화 context는 analyzer 단계에서만 합류시켜야 역할 경계가 흐려지지 않는다.
+- 브라우저 익스텐션에서 Pydantic Output Parser 역할이 필요할 때는 런타임 언어에 맞춰 strict JSON Schema structured output과 로컬 normalize 함수를 함께 두면 된다.
+- 테스트 모드가 실제 UX 컴포넌트를 재사용할 때는 전송/저장 같은 부작용 버튼을 테스트 전용 동작으로 바꿔야 분기 확인 중 실제 서비스 호출이 발생하지 않는다.
+- 파이프라인 테스트 모드는 완성 시나리오만 나열하기보다 단계와 결과값을 분리해야, 중간 모듈의 반환값에서 출발하는 분기 검증이 가능하다.
+- 테스트 분기 선택은 샘플 즉시 실행이 아니라 다음 실제 사용자 입력에 적용되는 override로 구현해야, 임의 프롬프트에서도 모듈 반환값 이후 흐름을 검증할 수 있다.
+- 테스트 override는 모듈 반환값까지만 바꾸고 이후 UI/개입 흐름은 실제 저장된 condition을 그대로 타야 실험 조건 검증이 가능하다.
+- GPT 웹 익스텐션의 실험 개입은 별도 팝업보다 원래 composer를 단계 입력으로 재사용해야 사용자가 실제 전송 흐름 안에서 자연스럽게 답변과 재작성을 수행할 수 있다.
+- composer를 단계형 UI로 사용할 때 최종 프롬프트 전송 단계는 별도 pass-through 상태로 표시해, 재작성된 프롬프트가 다시 classifier/analyzer로 재진입하지 않게 해야 한다.
+- 방향/답변 입력과 최종 GPT 프롬프트 입력은 분리해야 한다. surface 내부 textarea를 추가했다면 그 textarea도 GPT 입력 후보 탐색에서 제외해야 한다.
+- Analyzer 출력 계약을 바꿀 때 downstream에서 쓰던 보조 필드가 사라질 수 있다. 새 schema에 없는 request type 같은 값은 별도 fallback helper로 분리해야 한다.
+- 독립 실험 UI를 만들 때 피험자/실험자 화면은 같은 상태 모델을 공유하되 역할별 제어만 다르게 두면, 화면 일관성과 실험자 개입 흐름을 함께 검증하기 쉽다.
+- 서로 다른 컴퓨터의 실험 UI를 동기화할 때는 클라이언트 localStorage가 아니라 서버 측 세션 상태와 역할별 heartbeat를 두고, 한쪽이 없을 때 명시적인 대기 화면으로 실험 화면 진입을 막아야 한다.
+- 배포형 실험 UI에서 LLM API key는 피험자/실험자 브라우저 설정에 저장하지 말고 serverless endpoint의 환경변수로 관리해야 한다. 클라이언트는 analyzer/direction/rewrite 같은 역할별 endpoint만 호출하게 두면 조건별 흐름과 보안 경계가 선명해진다.
+- 실험 counterbalancing은 코드에 박아두지 말고 user ID별 JSON schedule로 분리해야 한다. 문제, condition, 설문 링크를 같은 schedule item에 묶어두면 제출 이후 설문과 다음 문제 전환을 안정적으로 동기화할 수 있다.
+- Vercel에서 Root Directory를 하위 폴더로 설정하면 그 폴더 밖의 `api/`, `vercel.json`, `package.json`은 배포 루트에 포함되지 않는다. 하위 폴더 단독 배포를 지원하려면 serverless 함수와 Vercel 설정을 그 폴더 안에도 둬야 한다.
+- 설문 트리거는 개별 문제 단위인지 condition block 단위인지 먼저 고정해야 한다. condition당 3문제처럼 block 단위 실험이면 JSON도 `conditions -> problemIds[] -> surveyUrl` 구조로 두고, 마지막 문제 제출 시에만 설문을 열어야 한다.
+- 실험 분석용 로그는 단순 채팅 transcript가 아니라 구조화된 이벤트 스트림으로 남겨야 한다. `type`과 공통 문맥 필드(problem, condition, participant, timestamp)를 고정하고, 코드/프롬프트/라벨/LLM 출력은 payload에 원문으로 저장하면 이후 유형별 분석이 쉽다.
+- 원격 polling UI에서 heartbeat 응답마다 전체 DOM을 재렌더링하면 textarea 입력과 한국어 IME 조합이 깨진다. payload의 실제 state/settings/presence 변경 여부를 비교해 필요한 경우에만 render하고, 입력 draft는 로컬 변수로 보존해야 한다.
+- 피험자 경험에서는 실험자 접속 상태나 대기 화면을 노출하지 않는 것이 좋다. 피험자는 ID만 입력해 과제로 들어가고, 실험자는 별도 URL에서 프롬프트 가로채기/분류 콘솔만 보는 구조가 덜 침습적이다.
+- LLM 분류 프롬프트를 만들 때는 코드북 전체를 길게 넣기보다 라벨 정의, 우선순위, 치명적 경계 사례를 짧게 고정하고 strict JSON schema와 gold-label 검증 스크립트를 함께 둬야 반복 개선이 빨라진다.
+- `Uncertain`처럼 표본 수가 적지만 중요한 라벨은 전체 정확도보다 라벨별 오분류율과 특정 방향 오분류율(`Uncertain -> No`)을 별도 지표로 관리해야 한다.
+- 작은 모델이 긴 대화 맥락에서 코드북 신호를 반복적으로 놓치면, 프롬프트를 더 길게 하기보다 로컬에서 감사 가능한 `rule_hint`를 계산하고 모델은 JSON 정규화/복사 역할로 제한하는 편이 더 빠르고 안정적이다.
+- gold label 샘플로 레이턴시를 잴 때 이전 대화 history를 생략하면 문맥 전파형 `Yes`가 `No`/`Uncertain`으로 바뀔 수 있으므로, 레이턴시 실험과 정확도 실험은 분리해서 기록해야 한다.
+- 분류 축을 바꿀 때는 런타임 분기뿐 아니라 테스트 fixture, manifest/API 등록, README, 이벤트 로그 이름까지 같이 바꿔야 예전 Analyzer 흐름이 죽은 코드로 남지 않는다.
+- WoZ 절차를 제거할 때는 화면 파일만 삭제하지 말고 세션 API, Vercel 설정, smoke 테스트, README, 익스텐션 설정 UI의 API 키/역할 문구까지 함께 정리해야 실제 제품 경계가 깔끔해진다.
+- 브라우저 확장 classifier에서 이전 프롬프트 history를 전역으로 저장하면 샘플 테스트가 서로 오염될 수 있다. 현재 턴에 명시적 사고 표현이 없으면 짧은 후속 지시일 때만 history를 참고해야 `No` 샘플이 이전 `Yes`에 끌려가지 않는다.
+- Codex 환경 설정 파일에는 API 키가 들어갈 수 있으므로 `.codex/`는 기본적으로 gitignore에 넣고, 커밋 전 `git show --name-only`로 환경 파일이 포함됐는지 확인해야 한다.

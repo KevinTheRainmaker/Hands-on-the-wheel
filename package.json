@@ -1,0 +1,8 @@
+{
+  "name": "delegation-prompt-gate",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "test": "node tests/smoke-extension.js"
+  }
+}

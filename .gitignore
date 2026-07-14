@@ -1,3 +1,15 @@
 .env
 .env.*
 !.env.example
+
+.codex/
+
+node_modules/
+**/node_modules/
+__pycache__/
+**/__pycache__/
+*.pyc
+
+# Generated dependency folders can appear under analysis outputs.
+outputs/**/node_modules/
+outputs/**/outputs/
